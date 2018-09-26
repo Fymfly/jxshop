@@ -1,19 +1,19 @@
 <?php
 namespace controllers;
 
-class BlogsController {
+class BlogController {
 
     // 列表页
     public function index() {
 
-        view('blogs/index');
+        view('blog/index');
     }
 
 
     // 显示添加的表单
     public function create() {
 
-        view('blogs/create');
+        view('blog/create');
     }
 
 
@@ -27,7 +27,7 @@ class BlogsController {
     // 显示修改的表单
     public function edit() {
 
-        view('blogs/edit');
+        view('blog/edit');
     }
 
 
