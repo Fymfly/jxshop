@@ -10,7 +10,7 @@ class DB {
     private $_pdo;
     private function __clone(){
         // 连接数据库
-        $this->_pdo = new \PDO('mysql:dbhost=172.0.0.1;dbname=jxshop', 'root', '');
+        $this->_pdo = new \PDO('mysql:host=172.0.0.1;dbname=jxshop', 'root', '');
         // 设置编码
         $this->_pdo->exec('SET NAMES utf8');
     }
