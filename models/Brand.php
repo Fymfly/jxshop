@@ -9,32 +9,27 @@ class Brand extends Model
     protected $fillable = ['brand_name','logo'];
 
     // 会在添加、修改之前自动调用
-    public function _before_write() {
-
+    public function _before_write()
+    {
         $this->_delete_logo();
 
         // 实现上传图片的代码
         $uploader = \libs\Uploader::make();
         $logo = '/uploads/' . $uploader->upload('logo', 'brand');
-
-        // $this->data : 将要插入到数据库中的数据（数组）
-        // 把 logo 加到数组中,就可以插入到数据库
-        $this->data['logo'] = $logo;
-    } 
-
-    // 在删除之前调用
-    public function _before_delete() {
-        
+        // $this->data ：将要插入到数据库中的数据（数组）
+        // 把 logo 加到数组中，就可以插入到数据库
+        $this->data['logo'] = $logo;   
+    }
+    // 删除之前被调用
+    public function _before_delete()
+    {
         $this->_delete_logo();
     }
-
-
-    // 删除图片
-    protected function _delete_logo() {
-
+    protected function _delete_logo()
+    {
         // 如果是修改就删除原图片
-        if(isset($_GET['id'])) {
-
+        if(isset($_GET['id']))
+        {
             // 先从数据库中取出原LOGO
             $ol = $this->findOne($_GET['id']);
             // 删除
