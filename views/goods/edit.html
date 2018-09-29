@@ -19,58 +19,61 @@
                         <tr>
                 <td class="label">商品名称:</td>
                 <td>
-                                            <input type='text' size="80" name='goods_name' value='<?=$data['goods_name']?>'>
-                                        <font color="red">*</font>
+                    <input type='text' size="80" name='goods_name' value='<?=$data['goods_name']?>'>
+                    <font color="red">*</font>
                 </td>
             </tr>
                         <tr>
                 <td class="label">LOGO:</td>
                 <td>
-                                            <input type='text' size="80" name='logo' value='<?=$data['logo']?>'>
-                                        <font color="red">*</font>
+                    <div class="img_preview">
+                        <img src="<?=$data['logo']?>" width="120" height="120">
+                    </div>
+                    <input class="preview" type='file' size="80" name='logo' value='<?=$data['logo']?>'>
+                    <font color="red">*</font>
                 </td>
             </tr>
                         <tr>
                 <td class="label">是否上架:</td>
                 <td>
-                                            <input type="radio" name="is_on_sale" value="y" <?php if($data['is_on_sale'] == 'y') echo 'checked'; ?>> 是
-                        <input type="radio" name="is_on_sale" value="n" <?php if($data['is_on_sale'] == 'n') echo 'checked'; ?>> 否
-                                        <font color="red">*</font>
+                    <input type="radio" name="is_on_sale" value="y" <?php if($data['is_on_sale'] == 'y') echo 'checked'; ?>> 是
+                    <input type="radio" name="is_on_sale" value="n" <?php if($data['is_on_sale'] == 'n') echo 'checked'; ?>> 否
+                    <font color="red">*</font>
                 </td>
             </tr>
                         <tr>
                 <td class="label">商品描述:</td>
                 <td>
-                                            <textarea name="description" id="" cols="80" rows="10"><?=$data['description']?></textarea>
-                                        <font color="red">*</font>
+                    <textarea name="description" id="" cols="80" rows="10"><?=$data['description']?></textarea>
+                    <font color="red">*</font>
                 </td>
             </tr>
                         <tr>
                 <td class="label">一级分类ID:</td>
                 <td>
-                                            <input type='text' size="80" name='cat1_id' value='<?=$data['cat1_id']?>'>
-                                        <font color="red">*</font>
+                    <input type='text' size="80" name='cat1_id' value='<?=$data['cat1_id']?>'>
+                    <font color="red">*</font>
                 </td>
             </tr>
                         <tr>
                 <td class="label">二级分类ID:</td>
                 <td>
-                                            <input type='text' size="80" name='cat2_id' value='<?=$data['cat2_id']?>'>
-                                        <font color="red">*</font>
+                    <input type='text' size="80" name='cat2_id' value='<?=$data['cat2_id']?>'>
+                    <font color="red">*</font>
                 </td>
             </tr>
                         <tr>
                 <td class="label">三级分类ID:</td>
                 <td>
-                                            <input type='text' size="80" name='cat3_id' value='<?=$data['cat3_id']?>'>
-                                        <font color="red">*</font>
+                    <input type='text' size="80" name='cat3_id' value='<?=$data['cat3_id']?>'>
+                    <font color="red">*</font>
                 </td>
             </tr>
                         <tr>
                 <td class="label">品牌ID:</td>
                 <td>
-                                            <input type='text' size="80" name='brand_id' value='<?=$data['brand_id']?>'>
-                                        <font color="red">*</font>
+                    <input type='text' size="80" name='brand_id' value='<?=$data['brand_id']?>'>
+                    <font color="red">*</font>
                 </td>
             </tr>
                     </table>
@@ -84,3 +87,5 @@
 <?=view('common/footer')?>
 </body>
 </html>
+<script src="/Js/jquery.min.js"></script>
+<script src="/Js/img_preview.js"></script>
