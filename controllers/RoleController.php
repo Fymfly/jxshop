@@ -21,10 +21,10 @@ class RoleController{
     {   
 
         // 取出所有权限
-        $priMidel = new \models\Privilege;
+        $priModel = new \models\Privilege;
 
         // 获取树形数据（递归排序）
-        $data = $priMidel->tree();
+        $data = $proMidel->tree();
 
         // 显示表单
         view('role/create',[
@@ -46,8 +46,21 @@ class RoleController{
     {
         $model = new Role;
         $data=$model->findOne($_GET['id']);
+
+        // 取出权限的数据
+        $priModel = new \models\Privilege;
+        // 获取树形数据（递归排序）
+        $priData = $priModel->tree();
+
+        // 取出这个角色所拥有的权限id
+        $priIds = $model->getPriIds($_GET['id']);
+
+        // var_dump( $priIds );
+
         view('role/edit', [
-            'data' => $data,    
+            'data' => $data,
+            'priData' => $priData,
+            'priIds' => $priIds,    
         ]);
     }
 

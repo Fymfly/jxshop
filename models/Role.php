@@ -10,8 +10,20 @@ class Role extends Model
 
 
     // 添加、修改角色之后自动加载被执行
-    // 获取添加完之后的ID : $this->data['id']
+    // 添加时，获取新添加的角色ID : $this->data['id']
+    // 修改时，获取要修改的角色ID : $_GET['id]
     protected function _after_write() {
+
+        // var_dump($_POST);
+        // exit;
+
+        $roleId = isset($_GET['id']) ? $_GET['id'] : $this->data['id'];
+
+        // 删除原权限
+        $stmt = $this->_db->prepare('DELETE FROM role_privlege WHERE role_id=?');
+        $stmt->execute([
+            $roleId
+        ]);
 
         $stmt = $this->_db->prepare("INSERT INTO role_privlege(pri_id,role_id) VALUES(?,?)");
         // 循环所有勾选的权限ID插入到中间表
@@ -19,7 +31,7 @@ class Role extends Model
         {
             $stmt->execute([
                 $v,
-                $this->data['id'],
+                $roleId
             ]);
         }
     }
@@ -33,4 +45,30 @@ class Role extends Model
             $_GET['id']
         ]);
     }
+
+
+    // 取出角色id所拥有的权限id
+    public function getPriIds($roleId) {
+        // 预处理
+        $stmt = $this->_db->prepare('SELECT pri_id FROM role_privlege WHERE role_id=?');
+        
+        // 执行
+        $stmt->execute([
+            $roleId
+        ]);
+        
+        // 取数据
+        $data = $stmt->fetchAll(\PDO::FETCH_ASSOC);
+        
+        // 转成一维数组
+        $_ret = [];
+        foreach($data as $k => $v) {
+
+            $_ret[] = $v['pri_id'];
+        }
+        
+        // 把一维的返回
+        return $_ret;
+    }
+
 }
