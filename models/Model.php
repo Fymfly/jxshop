@@ -119,6 +119,8 @@ use PDO;
             'order_by' => 'id',
             'order_way' => 'desc',
             'per_page'=>20,
+            'join'=>'',
+            'groupby'=>'',
         ];
 
         // 合并用户的配置
@@ -135,7 +137,9 @@ use PDO;
         
         $sql = "SELECT {$_option['fields']}
                  FROM {$this->table}
+                 {$_option['join']}
                  WHERE {$_option['where']} 
+                 {$_option['groupby']}
                  ORDER BY {$_option['order_by']} {$_option['order_way']} 
                  LIMIT $offset,{$_option['per_page']}";
 
@@ -172,5 +176,34 @@ use PDO;
         $stmt = $this->_db->prepare("SELECT * FROM {$this->table} WHERE id=?");
         $stmt->execute([$id]);
         return $stmt->fetch( PDO::FETCH_ASSOC );
+    }
+
+
+    // 递归排序（本类和子类可以调用 （protected）)
+    // 参数一、排序的数据
+    // 参数二、上级ID
+    // 参数三、第几级
+    protected function _tree($data, $parent_id = 0, $level = 0) {
+
+        // 定义一个数组保存排序好之后的数据
+        static $_ret = [];
+
+        foreach($data as $v) {
+
+            if($v['parent_id'] == $parent_id) {
+
+                // 标记它的级别
+                $v['level'] = $level;
+
+                // 挪到排序之后的数组
+                $_ret[] = $v;
+
+                // 找 $v 的子分类
+                $this->_tree($data, $v['id'], $level+1);
+            }
+        }
+
+        // 返回排序好的数组
+        return $_ret;
     }
  }
