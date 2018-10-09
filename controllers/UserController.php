@@ -1,7 +1,7 @@
 <?php
 namespace controllers;
 
-class UserController {
+class UserController extends BaseController {
 
     public function hello() {
 

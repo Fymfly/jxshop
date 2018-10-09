@@ -3,7 +3,7 @@ namespace controllers;
 
 use models\Blog;
 
-class BlogController{
+class BlogController extends BaseController{
     // 列表页
     public function index()
     {

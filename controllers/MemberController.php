@@ -3,7 +3,7 @@ namespace controllers;
 
 use models\Member;
 
-class MemberController{
+class MemberController extends BaseController{
     // 列表页
     public function index()
     {

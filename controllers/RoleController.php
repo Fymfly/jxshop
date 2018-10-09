@@ -3,7 +3,7 @@ namespace controllers;
 
 use models\Role;
 
-class RoleController{
+class RoleController extends BaseController {
     // 列表页
     public function index()
     {
@@ -24,7 +24,7 @@ class RoleController{
         $priModel = new \models\Privilege;
 
         // 获取树形数据（递归排序）
-        $data = $proMidel->tree();
+        $data = $priModel->tree();
 
         // 显示表单
         view('role/create',[

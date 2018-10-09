@@ -1,6 +1,12 @@
 <?php
 define('ROOT', __DIR__ . '/../');
 
+// 设置时区
+date_default_timezone_set('PRC');
+
+
+session_start();
+
 // 引入函数文件
 require(ROOT.'libs/functions.php');
 

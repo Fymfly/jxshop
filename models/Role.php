@@ -24,7 +24,9 @@ class Role extends Model
         $stmt->execute([
             $roleId
         ]);
+        
 
+        // 重新添加新勾选的数据
         $stmt = $this->_db->prepare("INSERT INTO role_privlege(pri_id,role_id) VALUES(?,?)");
         // 循环所有勾选的权限ID插入到中间表
         foreach($_POST['pri_id'] as $v)
