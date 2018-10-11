@@ -220,4 +220,25 @@ use PDO;
         // 返回排序好的数组
         return $_ret;
     }
+
+    public function getAll($sql, $data=[]) {
+
+        $stmt = $this->_db->prepare($sql);
+        $stmt->execute($data);
+        return $stmt->fetchAll(\PDO::FETCH_ASSOC);
+    }
+
+    public function getRow($sql, $data=[]) {
+
+        $stmt = $this->_db->prepare($sql);
+        $stmt->execute($data);
+        return $stmt->fetchAll(\PDO::FETCH_ASSOC);
+    }
+
+    public function getOne($sql, $data=[]) {
+
+        $stmt = $this->_db->prepare($sql);
+        $stmt->execute($data);
+        return $stmt->fetchAll(\PDO::FETCH_COLUMN);
+    }
  }

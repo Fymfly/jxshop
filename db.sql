@@ -135,6 +135,7 @@ create table admin
 )engine=InnoDB comment='管理员表';
 
 
+
 insert into privilege(id,pri_name,url_path,parent_id) VALUES
 (1,'商品模块','',0),
     (2,'分类列表','category/index',1),
@@ -149,7 +150,7 @@ insert into privilege(id,pri_name,url_path,parent_id) VALUES
         (11,'添加商品','goods/create,goods/insert',10),
         (12,'修改商品','goods/edit,goods/update',10),
         (13,'删除商品','goods/delete',10),
-        (27,'AJAX获取分类','goods/ajax_get_cat',10),
+        (36,'AJAX获取分类','goods/ajax_get_cat',10),
 (14,'管理员模块','',0),
     (15,'权限列表','privilege/index',14),
         (16,'添加权限','privilege/create,privilege/insert',15),
@@ -162,7 +163,16 @@ insert into privilege(id,pri_name,url_path,parent_id) VALUES
     (23,'管理员列表','admin/index',14),
         (24,'添加管理员','admin/create,admin/insert',23),
         (25,'修改管理员','admin/edit,admin/update',23),
-        (26,'删除管理员','admin/delete',23);
+        (26,'删除管理员','admin/delete',23),
+(27,'文章模块','',0),
+    (28,'分类列表','Article_category/index',27),
+        (29,'添加分类','article_category/create,article_category/insert',28),
+        (30,'修改分类','article_category/edit,article_category/update',28),
+        (31,'删除分类','article_category/delete',28),
+    (32,'文章列表','article/index',27),
+        (33,'添加文章','article/create,article/insert',32),
+        (34,'修改文章','article/edit,article/update',32),
+        (35,'删除文章','article/delete',32);
 
 
 insert into role_privlege(pri_id,role_id) VALUES

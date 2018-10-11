@@ -49,7 +49,7 @@ class GoodsController extends BaseController {
     public function edit()
     {
         $model = new Goods;
-        $data=$model->getFullInfo($_GET['id']);
+        $data = $model->getFullInfo($_GET['id']);
     
         // var_dump($data);
 
