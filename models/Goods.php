@@ -44,6 +44,24 @@ class Goods extends Model
     // 修改时：获取商品ID $_GET['id']
     public function _after_write()
     {
+
+        // 连接 Redis
+        $client = new \Predis\Client([
+            'scheme' => 'tcp',
+            'host'   => 'localhost',
+            'port'   => 6379,
+        ]);
+
+        // 把logo图片添加到消息队列中
+        $imageDate = [
+            'id' => $this->data['id'],
+            'logo' => $this->data['logo'],
+            'table' => 'goods',
+            'column' => 'logo',
+        ];
+        
+        $client->lpush('jxshop:qiniu', serialize($imageDate));
+
         // 获取商品ID
         $goodsId = isset($_GET['id']) ? $_GET['id'] : $this->data['id'];
 
@@ -121,6 +139,16 @@ class Goods extends Model
                     $goodsId,
                     $path,
                 ]);
+
+                // 获取id
+                $id = $this->_db->lastInsertId();
+
+                $client->lpush('jxshop:qiniu', serialize([
+                    'id' => '',
+                    'logo' => $path,
+                    'table' => 'goods_image',
+                    'column' => 'path'
+                ]));
             }
         }
         /**

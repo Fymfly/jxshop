@@ -2,6 +2,8 @@
 namespace controllers;
 
 use models\Brand;
+use Qiniu\Storage\UploadManager;
+use Qiniu\Auth;
 
 class BrandController extends BaseController {
     // 列表页
@@ -14,13 +16,22 @@ class BrandController extends BaseController {
 
     // 显示添加的表单
     public function create()
-    {
+    {   
+
+        // $client = new Predis\Client([
+        //     'scheme' => 'tcp',
+        //     'host' => 'localhost',
+        //     'port' => 6379
+        // ]);
+        // $client->set('name','tom');
+
+        // exit;
         view('brand/create');
     }
 
     // 处理添加表单
     public function insert()
-    {
+    {   
         $model = new Brand;
         $model->fill($_POST);
         $model->insert();

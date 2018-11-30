@@ -10,6 +10,10 @@ session_start();
 // 引入函数文件
 require(ROOT.'libs/functions.php');
 
+
+// 引入 composer 安装的包
+require(ROOT.'vendor/autoload.php');
+
 // 自动加载
 function autoload($class) {
 

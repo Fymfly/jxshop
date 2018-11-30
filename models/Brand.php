@@ -20,6 +20,33 @@ class Brand extends Model
         // 把 logo 加到数组中，就可以插入到数据库
         $this->data['logo'] = $logo;   
     }
+
+
+    // 添加之后执行的钩子函数
+    public function _after_write() {
+
+        // 打印刚刚添加的品牌信息
+        // var_dump( $this->data );
+
+        // 构造数据（上传七牛云）
+        $data = [
+            'logo' => $this->data['logo'],
+            'id' => $this->data['id'],
+            'table' => 'brand',
+            'column' => 'logo',
+        ];
+
+        $client = new \Predis\Client([
+            'scheme' => 'tcp',
+            'host'   => 'localhost',
+            'port'   => 6379,
+        ]);
+
+        // 转成字符串保存到队列中
+        $client->lpush('jxshop:qiniu', serialize($data));
+    }
+
+
     // 删除之前被调用
     public function _before_delete()
     {
