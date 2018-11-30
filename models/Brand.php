@@ -43,7 +43,7 @@ class Brand extends Model
         ]);
 
         // 转成字符串保存到队列中
-        $client->lpush('jxshop:qiniu', serialize($data));
+        $client->lpush('jxshop:niqui', serialize($data));
     }
 
 

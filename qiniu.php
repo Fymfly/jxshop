@@ -53,7 +53,7 @@ while(true)
     // 判断是否成功
     if ($error !== null) {
         // 如果失败，重新将数据放回队列
-        $client->lpush('jxshop:qiniu', $rawdata[1]);            
+        $client->lpush('jxshop:qiniu', $rawdata[1]);        
     } else {
         // 更新数据库
         $new = $domain.'/'.$ret['key'];

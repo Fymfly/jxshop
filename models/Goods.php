@@ -53,14 +53,14 @@ class Goods extends Model
         ]);
 
         // 把logo图片添加到消息队列中
-        $imageDate = [
+        $imageData = [
             'id' => $this->data['id'],
             'logo' => $this->data['logo'],
             'table' => 'goods',
             'column' => 'logo',
         ];
         
-        $client->lpush('jxshop:qiniu', serialize($imageDate));
+        $client->lpush('jxshop:qiniu', serialize($imageData));
 
         // 获取商品ID
         $goodsId = isset($_GET['id']) ? $_GET['id'] : $this->data['id'];
@@ -144,7 +144,7 @@ class Goods extends Model
                 $id = $this->_db->lastInsertId();
 
                 $client->lpush('jxshop:qiniu', serialize([
-                    'id' => '',
+                    'id' => $id,
                     'logo' => $path,
                     'table' => 'goods_image',
                     'column' => 'path'
